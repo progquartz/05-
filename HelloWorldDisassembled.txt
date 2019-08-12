@@ -1,0 +1,29 @@
+     1: #include <stdio.h>
+     2: 
+     3: int main() {
+55                   push        ebp  
+8B EC                mov         ebp,esp  
+81 EC C0 00 00 00    sub         esp,0C0h  
+53                   push        ebx  
+56                   push        esi  
+57                   push        edi  
+8D BD 40 FF FF FF    lea         edi,[ebp-0C0h]  
+B9 30 00 00 00       mov         ecx,30h  
+B8 CC CC CC CC       mov         eax,0CCCCCCCCh  
+F3 AB                rep stos    dword ptr es:[edi]  
+     4: 	printf("Hello world!");
+68 30 6B 3A 01       push        offset string "Hello world!" (013A6B30h)  
+E8 5E FB FF FF       call        _printf (013A1316h)  
+83 C4 04             add         esp,4  
+     5: 	return 0;
+33 C0                xor         eax,eax  
+     6: }
+5F                   pop         edi  
+5E                   pop         esi  
+5B                   pop         ebx  
+81 C4 C0 00 00 00    add         esp,0C0h  
+3B EC                cmp         ebp,esp  
+E8 41 F9 FF FF       call        __RTC_CheckEsp (013A110Eh)  
+8B E5                mov         esp,ebp  
+5D                   pop         ebp  
+C3                   ret  
